@@ -5,11 +5,9 @@
     <classes>
       <class name="com.mycompany.autotest.TestNGTest">
         <methods>
-          <include name="setUpClass"/>
-          <include name="tearDownClass"/>
-          <include name="testFirstArray"/>
-          <include name="setUpMethod"/>
-          <include name="tearDownMethod"/>
+          <include name="test"/>
+          <include name="setUp"/>
+          <include name="tearDown"/>
         </methods>
       </class> <!-- com.mycompany.autotest.TestNGTest -->
     </classes>
