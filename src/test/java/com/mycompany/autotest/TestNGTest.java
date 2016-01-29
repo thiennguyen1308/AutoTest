@@ -1,19 +1,13 @@
 package com.mycompany.autotest;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
-import org.testng.annotations.*;
-import static org.testng.Assert.*;
 import org.openqa.selenium.*;
-import org.testng.ITestResult;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  *
@@ -25,45 +19,137 @@ public class TestNGTest {
     private String baseUrl;
     private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
-    private int pass;
-    private int fail;
 
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "C:\\vagrant\\chromedriver.exe");
-        driver = new ChromeDriver();
-        baseUrl = "https://www.google.com/";
-    }
-
-    @Test(invocationCount = 5)
-    public void test() throws Exception {
-
+        driver = new FirefoxDriver();
+        baseUrl = "http://localhost:8080";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.get(baseUrl + "/?gws_rd=ssl");
-        driver.findElement(By.id("lst-ib")).clear();
-        driver.findElement(By.id("lst-ib")).sendKeys("genk.vn");
-        driver.findElement(By.linkText("Trang thông tin dành cho tín đồ công nghệ | genK.vn")).click();
-        driver.findElement(By.cssSelector("a[title=\"iPhone 6 nhái iPhone 6s chưa là gì, iPhone 5s hô biến thành iPhone 6s mới đáng sợ\"]")).click();
-        assertEquals(driver.getTitle(), "iPhone 6 nhái iPhone 6s chưa là gì, iPhone 5s hô biến thành iPhone 6s mới đáng sợ | genK.vn");
-        driver.findElement(By.linkText("Công bố kết quả quay thưởng Bàn phím cơ RK-61 trị giá...")).click();
-        assertEquals(driver.getTitle(), "Công bố kết quả quay thưởng Bàn phím cơ RK-61 trị giá 1.500.000 đồng | genK.vn");
     }
 
-    @AfterMethod
-    public void writeResult(ITestResult result) {
-        if (result.getStatus() == 1) {
-            pass += 1;
-        } else {
-            fail += 1;
+    @Test()
+    public void test() throws Exception {
+        driver.get(baseUrl + "/faber-advertiser/");
+        driver.findElement(By.id("txt_password")).clear();
+        driver.findElement(By.id("txt_password")).sendKeys("123");
+        driver.findElement(By.id("txt_email_login")).clear();
+        driver.findElement(By.id("txt_email_login")).sendKeys("ledinhtuan2012@gmail.com");
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        driver.findElement(By.xpath("//li[3]/a/span")).click();
+        for (int second = 0;; second++) {
+            if (second >= 60) {
+                fail("timeout");
+            }
+            try {
+                if ("CP-269662407".equals(driver.findElement(By.linkText("CP-269662407")).getText())) {
+                    break;
+                } else {
+                    try {
+                        assertEquals(driver.findElement(By.linkText("CP-269662407")).getText(), "CP-269662407");
+                    } catch (Error e) {
+                        verificationErrors.append(e.toString());
+                    }
+                }
+            } catch (Exception e) {
+            }
+            Thread.sleep(1000);
         }
 
+        driver.findElement(By.xpath("//li[4]/a/span")).click();
+        for (int second = 0;; second++) {
+            if (second >= 60) {
+                fail("timeout");
+            }
+            try {
+                if ("CP-391139268".equals(driver.findElement(By.linkText("CP-391139268")).getText())) {
+                    break;
+                }
+            } catch (Exception e) {
+            }
+            Thread.sleep(1000);
+        }
+
+        try {
+            assertEquals(driver.findElement(By.linkText("CP-391139268")).getText(), "CP-391139268");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        driver.findElement(By.xpath("//li[6]/a/span")).click();
+        for (int second = 0;; second++) {
+            if (second >= 60) {
+                fail("timeout");
+            }
+            try {
+                if (isElementPresent(By.cssSelector("rect..highcharts-background"))) {
+                    break;
+                }
+            } catch (Exception e) {
+            }
+            Thread.sleep(1000);
+        }
+
+        driver.findElement(By.cssSelector("rect..highcharts-background")).click();
+        // ERROR: Caught exception [ERROR: Unsupported command [mouseMoveAt | css=rect..highcharts-background | ]]
+        for (int second = 0;; second++) {
+            if (second >= 60) {
+                fail("timeout");
+            }
+            try {
+                if ("CP-269662407".equals(driver.findElement(By.linkText("CP-269662407")).getText())) {
+                    break;
+                }
+            } catch (Exception e) {
+            }
+            Thread.sleep(1000);
+        }
+
+        try {
+            assertEquals(driver.findElement(By.linkText("CP-269662407")).getText(), "CP-269662407");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
-        System.out.println(pass);
-        System.out.println(fail);
         driver.quit();
+        String verificationErrorString = verificationErrors.toString();
+        if (!"".equals(verificationErrorString)) {
+            fail(verificationErrorString);
+        }
+    }
+
+    private boolean isElementPresent(By by) {
+        try {
+            driver.findElement(by);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    private boolean isAlertPresent() {
+        try {
+            driver.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException e) {
+            return false;
+        }
+    }
+
+    private String closeAlertAndGetItsText() {
+        try {
+            Alert alert = driver.switchTo().alert();
+            String alertText = alert.getText();
+            if (acceptNextAlert) {
+                alert.accept();
+            } else {
+                alert.dismiss();
+            }
+            return alertText;
+        } finally {
+            acceptNextAlert = true;
+        }
     }
 
 }
