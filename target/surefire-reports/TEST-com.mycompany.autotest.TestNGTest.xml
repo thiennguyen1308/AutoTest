@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="1" name="com.mycompany.autotest.TestNGTest" time="7.271" errors="0" skipped="0">
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.mycompany.autotest.TestNGTest" time="0.343" tests="3" errors="0" skipped="1" failures="2">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home/jre/lib"/>
@@ -23,8 +23,7 @@
     <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home/jre/lib/endorsed"/>
     <property name="os.arch" value="x86_64"/>
     <property name="java.io.tmpdir" value="/var/folders/dv/zh6fsbsx5b5_51vxl5fcqsb40000gp/T/"/>
-    <property name="line.separator" value="
-"/>
+    <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Mac OS X"/>
     <property name="maven.ext.class.path" value="/Applications/NetBeans/NetBeans 8.1.app/Contents/Resources/NetBeans/java/maven-nblib/netbeans-eventspy.jar"/>
@@ -64,30 +63,19 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.mycompany.autotest.TestNGTest" name="test" time="3.584">
-    <failure message="Element is not clickable at point (127.66667175292969, 232.39999389648438). Other element would receive the click: &lt;div class=&quot;blockUI blockOverlay&quot; style=&quot;z-index: 1000; border: medium none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(85, 85, 85); opacity: 0.000476615; cursor: default; position: fixed;&quot;&gt;&lt;/div&gt;
-Command duration or timeout: 66 milliseconds
-Build info: version: &apos;2.50.0&apos;, revision: &apos;1070ace4650453d518aeb03e7a9a36c9d264a8e7&apos;, time: &apos;2016-01-27 10:46:18&apos;
-System info: host: &apos;oros-Mac-mini-3.local&apos;, ip: &apos;172.30.4.221&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.11.3&apos;, java.version: &apos;1.8.0_71&apos;
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=44.0, platform=MAC, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
-Session ID: a45a0f81-f913-0c4e-801b-87ad2cacf254" type="org.openqa.selenium.WebDriverException">org.openqa.selenium.WebDriverException: Element is not clickable at point (127.66667175292969, 232.39999389648438). Other element would receive the click: &lt;div class=&quot;blockUI blockOverlay&quot; style=&quot;z-index: 1000; border: medium none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(85, 85, 85); opacity: 0.000476615; cursor: default; position: fixed;&quot;&gt;&lt;/div&gt;
-Command duration or timeout: 66 milliseconds
-Build info: version: &apos;2.50.0&apos;, revision: &apos;1070ace4650453d518aeb03e7a9a36c9d264a8e7&apos;, time: &apos;2016-01-27 10:46:18&apos;
-System info: host: &apos;oros-Mac-mini-3.local&apos;, ip: &apos;172.30.4.221&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.11.3&apos;, java.version: &apos;1.8.0_71&apos;
-Driver info: org.openqa.selenium.firefox.FirefoxDriver
-Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=44.0, platform=MAC, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
-Session ID: a45a0f81-f913-0c4e-801b-87ad2cacf254
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
-	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
-	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
-	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:327)
-	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:85)
-	at com.mycompany.autotest.TestNGTest.test(TestNGTest.java:58)
+  <testcase name="setUp" classname="com.mycompany.autotest.TestNGTest" time="0.217">
+    <failure message="&#10;Parameter &apos;browser&apos; is required by @Configuration on method setUp but has not been marked @Optional or defined&#10;" type="org.testng.TestNGException">org.testng.TestNGException: 
+
+Parameter 'browser' is required by @Configuration on method setUp but has not been marked @Optional or defined
+
+</failure>
+  </testcase>
+  <testcase name="testAuto" classname="com.mycompany.autotest.TestNGTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="tearDown" classname="com.mycompany.autotest.TestNGTest" time="0.006">
+    <failure type="java.lang.NullPointerException">java.lang.NullPointerException
+	at com.mycompany.autotest.TestNGTest.tearDown(TestNGTest.java:218)
 </failure>
   </testcase>
 </testsuite>

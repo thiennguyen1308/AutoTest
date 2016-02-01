@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite verbose="0" name="Failed suite [com.mycompany.autotest.TestNGTest]">
-  <test name="Command line test(failed)">
+<suite thread-count="3" verbose="0" name="Failed suite [TestSuite]">
+  <parameter name="browser" value="Chrome"/>
+  <test name="ChromeTest(failed)">
+    <parameter name="browser" value="Chrome"/>
     <classes>
       <class name="com.mycompany.autotest.TestNGTest">
         <methods>
-          <include name="test"/>
           <include name="setUp"/>
           <include name="tearDown"/>
+          <include name="testAuto"/>
         </methods>
       </class> <!-- com.mycompany.autotest.TestNGTest -->
     </classes>
-  </test> <!-- Command line test(failed) -->
-</suite> <!-- Failed suite [com.mycompany.autotest.TestNGTest] -->
+  </test> <!-- ChromeTest(failed) -->
+</suite> <!-- Failed suite [TestSuite] -->
