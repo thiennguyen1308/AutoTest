@@ -8,12 +8,12 @@
        </class>
     </classes>
   </test>
-<!--  <test name="FirefoxTest">
-  <parameter name="browser" value="Firefox" />
-    <classes>
-       <class name="com.mycompany.autotest.TestNGTest">
-       </class>
-    </classes>
-  </test>-->
+  <test name="FirefoxTest">
+      <parameter name="browser" value="Firefox" />
+      <classes>
+          <class name="com.mycompany.autotest.TestNGTest">
+          </class>
+      </classes>
+  </test>
  </suite>
 

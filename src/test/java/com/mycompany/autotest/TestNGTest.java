@@ -37,7 +37,7 @@ public class TestNGTest {
             driver.manage().window().maximize();
         } else if (browser.equalsIgnoreCase("chrome")) {
             System.out.println("chrome");
-            System.setProperty("webdriver.chrome.driver", "/Volumes/Macintosh HD/chromedriver");
+            System.setProperty("webdriver.chrome.driver", "/chromedriver");
             driver = new ChromeDriver();
             driver.manage().window().maximize();
         }
