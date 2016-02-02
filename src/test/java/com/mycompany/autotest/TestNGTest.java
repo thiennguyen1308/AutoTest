@@ -48,12 +48,14 @@ public class TestNGTest {
     @Test
     public void testAuto() throws Exception {
         driver.get(baseUrl + "faber-advertiser/");
+        System.out.println("Login");
         driver.findElement(By.id("txt_password")).clear();
         driver.findElement(By.id("txt_password")).sendKeys("a");
         driver.findElement(By.id("txt_email_login")).clear();
         driver.findElement(By.id("txt_email_login")).sendKeys("thien.advertiser@gmail.com");
         driver.findElement(By.xpath("//button[@type='submit']")).click();
         Thread.sleep(4000);
+        System.out.println("scan dashboard");
         try {
             assertEquals(driver.findElement(By.xpath("//div[2]/div/div/span")).getText(), "KẾT QUẢ CHIẾN DỊCH");
         } catch (Error e) {
@@ -65,6 +67,8 @@ public class TestNGTest {
             verificationErrors.append(e.toString());
         }
         driver.findElement(By.linkText("Chiến dịch")).click();
+        System.out.println("scan campaign");
+
         Thread.sleep(4000);
         for (int second = 0;; second++) {
             if (second >= 10) {
@@ -85,6 +89,7 @@ public class TestNGTest {
             verificationErrors.append(e.toString());
         }
         driver.findElement(By.linkText("Kiểm tra mua hàng")).click();
+        System.out.println("Check aquisition");
         Thread.sleep(4000);
         for (int second = 0;; second++) {
             if (second >= 10) {
@@ -100,6 +105,7 @@ public class TestNGTest {
         }
 
         driver.findElement(By.xpath("//li[6]/a/span")).click();
+        System.out.println("check report");
         Thread.sleep(4000);
         driver.findElement(By.id("drp_autogen0")).click();
         driver.findElement(By.xpath("(/html/body/div[8]/div[1]/div[1]/div/div[2]/table/tbody/tr[1]/td[6]/a)")).click();
@@ -130,6 +136,7 @@ public class TestNGTest {
             verificationErrors.append(e.toString());
         }
         new Select(driver.findElement(By.xpath("//*[@id=\"cbo_campaign_type\"]"))).selectByVisibleText("CPA");
+        System.out.println("check CPA");
         Thread.sleep(1000);
         for (int second = 0;; second++) {
             if (second >= 10) {
@@ -155,6 +162,7 @@ public class TestNGTest {
             verificationErrors.append(e.toString());
         }
         new Select(driver.findElement(By.xpath("//*[@id=\"cbo_campaign_type\"]"))).selectByVisibleText("CPI");
+        System.out.println("check CPI");
         Thread.sleep(1000);
         for (int second = 0;; second++) {
             if (second >= 10) {
@@ -180,6 +188,7 @@ public class TestNGTest {
             verificationErrors.append(e.toString());
         }
         new Select(driver.findElement(By.xpath("//*[@id=\"cbo_campaign_type\"]"))).selectByVisibleText("CPC");
+        System.out.println("check CPC");
         Thread.sleep(1000);
         for (int second = 0;; second++) {
             if (second >= 10) {
@@ -218,7 +227,7 @@ public class TestNGTest {
             }
             Thread.sleep(4000);
         }
-
+        System.out.println("Sign out");
         driver.findElement(By.cssSelector("i.icon-login")).click();
     }
 

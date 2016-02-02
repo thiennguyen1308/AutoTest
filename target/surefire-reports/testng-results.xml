@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="TestSuite" duration-ms="27372" started-at="2016-02-02T02:42:10Z" finished-at="2016-02-02T02:42:37Z">
+  <suite name="TestSuite" duration-ms="27605" started-at="2016-02-02T02:50:18Z" finished-at="2016-02-02T02:50:46Z">
     <groups>
     </groups>
-    <test name="ChromeTest" duration-ms="27372" started-at="2016-02-02T02:42:10Z" finished-at="2016-02-02T02:42:37Z">
+    <test name="ChromeTest" duration-ms="27605" started-at="2016-02-02T02:50:18Z" finished-at="2016-02-02T02:50:46Z">
       <class name="com.mycompany.autotest.TestNGTest">
-        <test-method status="PASS" signature="setUp(java.lang.String)[pri:0, instance:com.mycompany.autotest.TestNGTest@3cbbc1e0]" name="setUp" is-config="true" duration-ms="1976" started-at="2016-02-02T09:42:10Z" finished-at="2016-02-02T09:42:12Z">
+        <test-method status="PASS" signature="setUp(java.lang.String)[pri:0, instance:com.mycompany.autotest.TestNGTest@3cbbc1e0]" name="setUp" is-config="true" duration-ms="2070" started-at="2016-02-02T09:50:18Z" finished-at="2016-02-02T09:50:20Z">
           <params>
             <param index="0">
               <value>
@@ -18,11 +18,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="testAuto()[pri:0, instance:com.mycompany.autotest.TestNGTest@3cbbc1e0]" name="testAuto" duration-ms="25251" started-at="2016-02-02T09:42:12Z" finished-at="2016-02-02T09:42:37Z">
+        <test-method status="PASS" signature="testAuto()[pri:0, instance:com.mycompany.autotest.TestNGTest@3cbbc1e0]" name="testAuto" duration-ms="25376" started-at="2016-02-02T09:50:20Z" finished-at="2016-02-02T09:50:46Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testAuto -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.mycompany.autotest.TestNGTest@3cbbc1e0]" name="tearDown" is-config="true" duration-ms="136" started-at="2016-02-02T09:42:37Z" finished-at="2016-02-02T09:42:37Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.mycompany.autotest.TestNGTest@3cbbc1e0]" name="tearDown" is-config="true" duration-ms="151" started-at="2016-02-02T09:50:46Z" finished-at="2016-02-02T09:50:46Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
