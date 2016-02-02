@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite thread-count="3" verbose="0" name="Failed suite [TestSuite]">
-  <parameter name="browser" value="Chrome"/>
-  <test name="ChromeTest(failed)">
-    <parameter name="browser" value="Chrome"/>
+  <parameter name="browser" value="Firefox"/>
+  <test name="FirefoxTest(failed)">
+    <parameter name="browser" value="Firefox"/>
     <classes>
       <class name="com.mycompany.autotest.TestNGTest">
         <methods>
@@ -13,5 +13,5 @@
         </methods>
       </class> <!-- com.mycompany.autotest.TestNGTest -->
     </classes>
-  </test> <!-- ChromeTest(failed) -->
+  </test> <!-- FirefoxTest(failed) -->
 </suite> <!-- Failed suite [TestSuite] -->

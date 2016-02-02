@@ -1,5 +1,6 @@
 package com.mycompany.autotest;
 
+import com.gargoylesoftware.htmlunit.javascript.host.URL;
 import org.openqa.selenium.WebDriver;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
@@ -8,7 +9,8 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.Assertion;
@@ -32,9 +34,14 @@ public class TestNGTest {
     @BeforeClass(alwaysRun = true)
     public void setUp(String browser) throws Exception {
         if (browser.equalsIgnoreCase("firefox")) {
-            System.out.println("firefox");
-            driver = new FirefoxDriver();
-            driver.manage().window().maximize();
+//            System.out.println("firefox");
+//            driver = new FirefoxDriver();
+//            driver.manage().window().maximize();
+            DesiredCapabilities cap = new DesiredCapabilities();
+            cap.setBrowserName("firefox");
+            cap.setVersion("44.0");
+            cap.setPlatform(org.openqa.selenium.Platform.EL_CAPITAN);
+            driver = new RemoteWebDriver(new java.net.URL("http://localhost:4444/wd/hub"), cap);
         } else if (browser.equalsIgnoreCase("chrome")) {
             System.out.println("chrome");
             System.setProperty("webdriver.chrome.driver", "/chromedriver");
