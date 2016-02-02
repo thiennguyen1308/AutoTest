@@ -1,6 +1,5 @@
 package com.mycompany.autotest;
 
-import com.gargoylesoftware.htmlunit.javascript.host.URL;
 import org.openqa.selenium.WebDriver;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
@@ -9,12 +8,15 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.Assertion;
 import org.testng.asserts.SoftAssert;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * s
@@ -29,19 +31,24 @@ public class TestNGTest {
     private final Assertion hardAssert = new Assertion();
     private final SoftAssert softAssert = new SoftAssert();
     private WebDriver driver;
+    private ExtentReports extent;
+    private ExtentTest child;
 
     @Parameters({"browser"})
     @BeforeClass(alwaysRun = true)
     public void setUp(String browser) throws Exception {
+        extent = new ExtentReports("/Volumes/Data/Extent.html", true);
+        ExtentTest child = extent.startTest("Test");
         if (browser.equalsIgnoreCase("firefox")) {
-//            System.out.println("firefox");
-//            driver = new FirefoxDriver();
-//            driver.manage().window().maximize();
-            DesiredCapabilities cap = new DesiredCapabilities();
-            cap.setBrowserName("firefox");
-            cap.setVersion("44.0");
-            cap.setPlatform(org.openqa.selenium.Platform.EL_CAPITAN);
-            driver = new RemoteWebDriver(new java.net.URL("http://localhost:4444/wd/hub"), cap);
+            System.out.println("firefox");
+            driver = new FirefoxDriver();
+            driver.manage().window().maximize();
+            child.log(LogStatus.INFO, browser);
+//            DesiredCapabilities cap = new DesiredCapabilities();
+//            cap.setBrowserName("firefox");
+//            cap.setVersion("44.0");
+//            cap.setPlatform(org.openqa.selenium.Platform.EL_CAPITAN);
+//            driver = new RemoteWebDriver(new java.net.URL("http://localhost:4444/wd/hub"), cap);
         } else if (browser.equalsIgnoreCase("chrome")) {
             System.out.println("chrome");
             System.setProperty("webdriver.chrome.driver", "/chromedriver");
@@ -62,6 +69,7 @@ public class TestNGTest {
         driver.findElement(By.id("txt_email_login")).sendKeys("thien.advertiser@gmail.com");
         driver.findElement(By.xpath("//button[@type='submit']")).click();
         Thread.sleep(4000);
+        child.log(LogStatus.INFO, "scan");
         System.out.println("scan dashboard");
         try {
             assertEquals(driver.findElement(By.xpath("//div[2]/div/div/span")).getText(), "KẾT QUẢ CHIẾN DỊCH");
@@ -75,8 +83,10 @@ public class TestNGTest {
         }
         driver.findElement(By.linkText("Chiến dịch")).click();
         System.out.println("scan campaign");
+        child.log(LogStatus.INFO, "scan campaign");
 
         Thread.sleep(4000);
+        child.log(LogStatus.INFO, "Screencast below: " + child.addScreencast("screencast-path"));
         for (int second = 0;; second++) {
             if (second >= 10) {
                 fail("timeout");
@@ -240,7 +250,9 @@ public class TestNGTest {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
+        extent.endTest(child);
         driver.quit();
+        extent.flush();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
