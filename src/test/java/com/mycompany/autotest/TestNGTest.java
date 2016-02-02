@@ -20,14 +20,14 @@ import org.testng.asserts.SoftAssert;
  * @author Nguyen Duc Thien
  */
 public class TestNGTest {
-    
+
     private String baseUrl;
     private boolean acceptNextAlert = true;
     private final StringBuffer verificationErrors = new StringBuffer();
     private final Assertion hardAssert = new Assertion();
     private final SoftAssert softAssert = new SoftAssert();
     private WebDriver driver;
-    
+
     @Parameters({"browser"})
     @BeforeClass(alwaysRun = true)
     public void setUp(String browser) throws Exception {
@@ -44,7 +44,7 @@ public class TestNGTest {
         baseUrl = "http://localhost:8080/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
-    
+
     @Test
     public void testAuto() throws Exception {
         driver.get(baseUrl + "faber-advertiser/");
@@ -53,7 +53,7 @@ public class TestNGTest {
         driver.findElement(By.id("txt_email_login")).clear();
         driver.findElement(By.id("txt_email_login")).sendKeys("thien.advertiser@gmail.com");
         driver.findElement(By.xpath("//button[@type='submit']")).click();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         try {
             assertEquals(driver.findElement(By.xpath("//div[2]/div/div/span")).getText(), "KẾT QUẢ CHIẾN DỊCH");
         } catch (Error e) {
@@ -65,7 +65,7 @@ public class TestNGTest {
             verificationErrors.append(e.toString());
         }
         driver.findElement(By.linkText("Chiến dịch")).click();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         for (int second = 0;; second++) {
             if (second >= 10) {
                 fail("timeout");
@@ -76,16 +76,16 @@ public class TestNGTest {
                 }
             } catch (Exception e) {
             }
-            Thread.sleep(1000);
+            Thread.sleep(4000);
         }
-        
+
         try {
             assertEquals(driver.findElement(By.linkText("CP-786913367")).getText(), "CP-786913367");
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         driver.findElement(By.linkText("Kiểm tra mua hàng")).click();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         for (int second = 0;; second++) {
             if (second >= 10) {
                 fail("timeout");
@@ -96,11 +96,15 @@ public class TestNGTest {
                 }
             } catch (Exception e) {
             }
-            Thread.sleep(1000);
+            Thread.sleep(4000);
         }
-        
+
         driver.findElement(By.xpath("//li[6]/a/span")).click();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
+        driver.findElement(By.id("drp_autogen0")).click();
+        driver.findElement(By.xpath("(/html/body/div[8]/div[1]/div[1]/div/div[2]/table/tbody/tr[1]/td[6]/a)")).click();
+        driver.findElement(By.xpath("(/html/body/div[8]/div[1]/div[1]/div/div[2]/table/tbody/tr[6]/td[1]/a)")).click();
+        driver.findElement(By.xpath("(/html/body/div[8]/div[2]/div/button[1])")).click();
         new Select(driver.findElement(By.xpath("//*[@id=\"cbo_campaign_type\"]"))).selectByVisibleText("All");
         try {
             assertEquals(driver.findElement(By.linkText("CP-435846415")).getText(), "CP-435846415");
@@ -117,15 +121,16 @@ public class TestNGTest {
                 }
             } catch (Exception e) {
             }
-            Thread.sleep(1000);
+            Thread.sleep(4000);
         }
-        
+
         try {
             assertEquals(driver.findElement(By.linkText("CP-948952808")).getText(), "CP-948952808");
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         new Select(driver.findElement(By.xpath("//*[@id=\"cbo_campaign_type\"]"))).selectByVisibleText("CPA");
+        Thread.sleep(1000);
         for (int second = 0;; second++) {
             if (second >= 10) {
                 fail("timeout");
@@ -136,9 +141,9 @@ public class TestNGTest {
                 }
             } catch (Exception e) {
             }
-            Thread.sleep(1000);
+            Thread.sleep(4000);
         }
-        
+
         try {
             assertEquals(driver.findElement(By.linkText("CP-645390271")).getText(), "CP-645390271");
         } catch (Error e) {
@@ -150,6 +155,7 @@ public class TestNGTest {
             verificationErrors.append(e.toString());
         }
         new Select(driver.findElement(By.xpath("//*[@id=\"cbo_campaign_type\"]"))).selectByVisibleText("CPI");
+        Thread.sleep(1000);
         for (int second = 0;; second++) {
             if (second >= 10) {
                 fail("timeout");
@@ -160,9 +166,9 @@ public class TestNGTest {
                 }
             } catch (Exception e) {
             }
-            Thread.sleep(1000);
+            Thread.sleep(4000);
         }
-        
+
         try {
             assertEquals(driver.findElement(By.linkText("CP-200605663")).getText(), "CP-200605663");
         } catch (Error e) {
@@ -174,6 +180,7 @@ public class TestNGTest {
             verificationErrors.append(e.toString());
         }
         new Select(driver.findElement(By.xpath("//*[@id=\"cbo_campaign_type\"]"))).selectByVisibleText("CPC");
+        Thread.sleep(1000);
         for (int second = 0;; second++) {
             if (second >= 10) {
                 fail("timeout");
@@ -184,9 +191,9 @@ public class TestNGTest {
                 }
             } catch (Exception e) {
             }
-            Thread.sleep(1000);
+            Thread.sleep(4000);
         }
-        
+
         try {
             assertEquals(driver.findElement(By.linkText("CP-435846415")).getText(), "CP-435846415");
         } catch (Error e) {
@@ -198,6 +205,7 @@ public class TestNGTest {
             verificationErrors.append(e.toString());
         }
         driver.findElement(By.xpath("//li[7]/a/span")).click();
+        Thread.sleep(1000);
         for (int second = 0;; second++) {
             if (second >= 10) {
                 fail("timeout");
@@ -208,12 +216,12 @@ public class TestNGTest {
                 }
             } catch (Exception e) {
             }
-            Thread.sleep(1000);
+            Thread.sleep(4000);
         }
-        
+
         driver.findElement(By.cssSelector("i.icon-login")).click();
     }
-    
+
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         driver.quit();
@@ -222,7 +230,7 @@ public class TestNGTest {
             fail(verificationErrorString);
         }
     }
-    
+
     private boolean isElementPresent(By by) {
         try {
             driver.findElement(by);
@@ -231,7 +239,7 @@ public class TestNGTest {
             return false;
         }
     }
-    
+
     private boolean isAlertPresent() {
         try {
             driver.switchTo().alert();
@@ -240,7 +248,7 @@ public class TestNGTest {
             return false;
         }
     }
-    
+
     private String closeAlertAndGetItsText() {
         try {
             Alert alert = driver.switchTo().alert();
@@ -255,5 +263,5 @@ public class TestNGTest {
             acceptNextAlert = true;
         }
     }
-    
+
 }
