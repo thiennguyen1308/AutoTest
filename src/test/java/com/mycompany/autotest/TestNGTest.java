@@ -40,6 +40,7 @@ public class TestNGTest {
     public void setUp(String browser) throws Exception {
         extend = Selenium_report.Instance();
         if (browser.equalsIgnoreCase("firefox")) {
+            test = extend.startTest("test " + browser);
             System.out.println("firefox");
             driver = new FirefoxDriver();
             driver.manage().window().maximize();
@@ -49,6 +50,7 @@ public class TestNGTest {
 //            cap.setPlatform(org.openqa.selenium.Platform.EL_CAPITAN);
 //            driver = new RemoteWebDriver(new java.net.URL("http://localhost:4444/wd/hub"), cap);
         } else if (browser.equalsIgnoreCase("chrome")) {
+            test = extend.startTest("test " + browser);
             System.out.println("chrome");
             System.setProperty("webdriver.chrome.driver", "/chromedriver");
             driver = new ChromeDriver();
@@ -60,7 +62,6 @@ public class TestNGTest {
 
     @Test
     public void testAuto() throws Exception {
-        test = extend.startTest("test");
         driver.get(baseUrl + "faber-advertiser/");
         System.out.println("Login");
         driver.findElement(By.id("txt_password")).clear();
@@ -75,7 +76,7 @@ public class TestNGTest {
             test.log(LogStatus.PASS, "Check KẾT QUẢ CHIẾN DỊCH");
         } catch (Error e) {
             verificationErrors.append(e.toString());
-            test.log(LogStatus.FAIL, e.toString());
+            test.log(LogStatus.FAIL, "check KẾT QUẢ CHIẾN DỊCH", e.toString() + "like below" + test.addScreenCapture(Selenium_report.CaptureScreen(driver, String.valueOf(System.currentTimeMillis()))));
         }
         try {
             assertEquals(driver.findElement(By.xpath("//div[3]/div/div/span")).getText(), "GIÁ");

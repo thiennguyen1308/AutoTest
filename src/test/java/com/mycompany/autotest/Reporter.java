@@ -24,7 +24,7 @@ public class Reporter implements IReporter {
 
     @Override
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
-        extend = new ExtentReports("./TestNG-result.html", true);
+        extend = new ExtentReports("./test_result/TestNG-result.html", false);
 
         for (ISuite suite : suites) {
             Map<String, ISuiteResult> result = suite.getResults();
