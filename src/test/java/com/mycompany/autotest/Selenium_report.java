@@ -18,7 +18,7 @@ public class Selenium_report {
     public static ExtentReports Instance() {
         ExtentReports extent;
         String Path = "./test_result/ExtentReport.html";
-        extent = new ExtentReports(Path, true, NEWEST_FIRST);
+        extent = new ExtentReports(Path, false, NEWEST_FIRST);
         extent.config().documentTitle("Automation Report").reportName("Regression");
 
         return extent;
@@ -27,7 +27,7 @@ public class Selenium_report {
     public static String CaptureScreen(WebDriver driver, String ImagesName) {
         TakesScreenshot oScn = (TakesScreenshot) driver;
         File oScnShot = oScn.getScreenshotAs(OutputType.FILE);
-        File oDest = new File(ImagesName + ".jpg");
+        File oDest = new File("./test_result/snapshot/" + ImagesName + ".jpg");
         try {
             FileUtils.copyFile(oScnShot, oDest);
         } catch (IOException e) {
