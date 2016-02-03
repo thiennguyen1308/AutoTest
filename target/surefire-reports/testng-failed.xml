@@ -2,28 +2,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite thread-count="3" verbose="0" name="Failed suite [TestSuite]">
   <parameter name="browser" value="Firefox"/>
-  <test name="ChromeTest(failed)">
-    <parameter name="browser" value="Chrome"/>
-    <classes>
-      <class name="com.mycompany.autotest.TestNGTest">
-        <methods>
-          <include name="setUp"/>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
-          <include name="testAuto"/>
-        </methods>
-      </class> <!-- com.mycompany.autotest.TestNGTest -->
-    </classes>
-  </test> <!-- ChromeTest(failed) -->
+  <listeners>
+    <listener class-name="com.mycompany.autotest.Reporter"/>
+  </listeners>
   <test name="FirefoxTest(failed)">
     <parameter name="browser" value="Firefox"/>
     <classes>
       <class name="com.mycompany.autotest.TestNGTest">
         <methods>
           <include name="setUp"/>
-          <include name="setUp"/>
-          <include name="tearDown"/>
           <include name="tearDown"/>
           <include name="testAuto"/>
         </methods>

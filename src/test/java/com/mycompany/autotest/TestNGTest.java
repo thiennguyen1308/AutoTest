@@ -1,5 +1,7 @@
 package com.mycompany.autotest;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
 import org.openqa.selenium.WebDriver;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
@@ -13,13 +15,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.Assertion;
 import org.testng.asserts.SoftAssert;
-
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
+import com.mycompany.autotest.Selenium_report;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
- * s
+ *
  *
  * @author Nguyen Duc Thien
  */
@@ -31,19 +31,18 @@ public class TestNGTest {
     private final Assertion hardAssert = new Assertion();
     private final SoftAssert softAssert = new SoftAssert();
     private WebDriver driver;
-    private ExtentReports extent;
-    private ExtentTest child;
+    private ExtentReports extend;
+    private ExtentTest test;
+    private String error;
 
     @Parameters({"browser"})
     @BeforeClass(alwaysRun = true)
     public void setUp(String browser) throws Exception {
-        extent = new ExtentReports("/Volumes/Data/Extent.html", true);
-        ExtentTest child = extent.startTest("Test");
+        extend = Selenium_report.Instance();
         if (browser.equalsIgnoreCase("firefox")) {
             System.out.println("firefox");
             driver = new FirefoxDriver();
             driver.manage().window().maximize();
-            child.log(LogStatus.INFO, browser);
 //            DesiredCapabilities cap = new DesiredCapabilities();
 //            cap.setBrowserName("firefox");
 //            cap.setVersion("44.0");
@@ -61,6 +60,7 @@ public class TestNGTest {
 
     @Test
     public void testAuto() throws Exception {
+        test = extend.startTest("test");
         driver.get(baseUrl + "faber-advertiser/");
         System.out.println("Login");
         driver.findElement(By.id("txt_password")).clear();
@@ -69,35 +69,45 @@ public class TestNGTest {
         driver.findElement(By.id("txt_email_login")).sendKeys("thien.advertiser@gmail.com");
         driver.findElement(By.xpath("//button[@type='submit']")).click();
         Thread.sleep(4000);
-        child.log(LogStatus.INFO, "scan");
         System.out.println("scan dashboard");
         try {
-            assertEquals(driver.findElement(By.xpath("//div[2]/div/div/span")).getText(), "KẾT QUẢ CHIẾN DỊCH");
+            assertEquals(driver.findElement(By.xpath("//div[2]/div/div/span")).getText(), "KẾT QUẢ CHIẾN DỊCH123");
+            test.log(LogStatus.PASS, "Check KẾT QUẢ CHIẾN DỊCH");
         } catch (Error e) {
             verificationErrors.append(e.toString());
+            test.log(LogStatus.FAIL, e.toString());
         }
         try {
             assertEquals(driver.findElement(By.xpath("//div[3]/div/div/span")).getText(), "GIÁ");
+            test.log(LogStatus.PASS, "Check GIÁ");
         } catch (Error e) {
             verificationErrors.append(e.toString());
+            test.log(LogStatus.FAIL, e.toString());
         }
         driver.findElement(By.linkText("Chiến dịch")).click();
         System.out.println("scan campaign");
-        child.log(LogStatus.INFO, "scan campaign");
 
-        Thread.sleep(4000);
-        child.log(LogStatus.INFO, "Screencast below: " + child.addScreencast("screencast-path"));
+        Thread.sleep(2000);
         for (int second = 0;; second++) {
-            if (second >= 10) {
-                fail("timeout");
+            if (second >= 1) {
+                if (error != null) {
+                    test.log(LogStatus.ERROR, "Can't find CP-645390271", error);
+                    error = null;
+                } else {
+                    test.log(LogStatus.FAIL, driver.findElement(By.linkText("CP-645390271")).getText() + " not equal CP-645390271");
+                }
+                break;
+
             }
             try {
-                if ("CP-645390271".equals(driver.findElement(By.linkText("CP-645390271")).getText())) {
+                if ("CP-64539027".equals(driver.findElement(By.linkText("CP-64539027")).getText())) {
+                    test.log(LogStatus.PASS, "Find CP-645390271");
                     break;
                 }
             } catch (Exception e) {
+                error = e.getMessage();
             }
-            Thread.sleep(4000);
+            Thread.sleep(1000);
         }
 
         try {
@@ -107,7 +117,7 @@ public class TestNGTest {
         }
         driver.findElement(By.linkText("Kiểm tra mua hàng")).click();
         System.out.println("Check aquisition");
-        Thread.sleep(4000);
+        Thread.sleep(2000);
         for (int second = 0;; second++) {
             if (second >= 10) {
                 fail("timeout");
@@ -118,12 +128,12 @@ public class TestNGTest {
                 }
             } catch (Exception e) {
             }
-            Thread.sleep(4000);
+            Thread.sleep(1000);
         }
 
         driver.findElement(By.xpath("//li[6]/a/span")).click();
         System.out.println("check report");
-        Thread.sleep(4000);
+        Thread.sleep(2000);
         driver.findElement(By.id("drp_autogen0")).click();
         driver.findElement(By.xpath("(/html/body/div[8]/div[1]/div[1]/div/div[2]/table/tbody/tr[1]/td[6]/a)")).click();
         driver.findElement(By.xpath("(/html/body/div[8]/div[1]/div[1]/div/div[2]/table/tbody/tr[6]/td[1]/a)")).click();
@@ -144,7 +154,7 @@ public class TestNGTest {
                 }
             } catch (Exception e) {
             }
-            Thread.sleep(4000);
+            Thread.sleep(1000);
         }
 
         try {
@@ -165,7 +175,7 @@ public class TestNGTest {
                 }
             } catch (Exception e) {
             }
-            Thread.sleep(4000);
+            Thread.sleep(1000);
         }
 
         try {
@@ -191,7 +201,7 @@ public class TestNGTest {
                 }
             } catch (Exception e) {
             }
-            Thread.sleep(4000);
+            Thread.sleep(1000);
         }
 
         try {
@@ -217,7 +227,7 @@ public class TestNGTest {
                 }
             } catch (Exception e) {
             }
-            Thread.sleep(4000);
+            Thread.sleep(1000);
         }
 
         try {
@@ -242,17 +252,20 @@ public class TestNGTest {
                 }
             } catch (Exception e) {
             }
-            Thread.sleep(4000);
+            Thread.sleep(1000);
         }
         System.out.println("Sign out");
         driver.findElement(By.cssSelector("i.icon-login")).click();
+
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
-        extent.endTest(child);
+
+        extend.endTest(test);
+        extend.flush();
+        extend.close();
         driver.quit();
-        extent.flush();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
