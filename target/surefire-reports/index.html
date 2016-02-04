@@ -53,7 +53,7 @@
                 </li>
                 <li>
                   <a href="#" class="navigator-link " panel-name="testlist-TestSuite">
-                    <span class="test-stats">2 tests</span>
+                    <span class="test-stats">3 tests</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -90,7 +90,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods,   2 passed</span>
+                    <span class="method-stats">3 methods,   3 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -99,6 +99,11 @@
                       <a href="#" panel-name="suite-TestSuite" class="show-methods passed suite-TestSuite"> (show)</a> <!-- show-methods passed suite-TestSuite -->
                     </span>
                     <div class="method-list-content passed suite-TestSuite">
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-TestSuite" title="com.mycompany.autotest.TestNGTest" hash-for-method="testAuto">testAuto</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-TestSuite" title="com.mycompany.autotest.TestNGTest" hash-for-method="testAuto">testAuto</a> <!-- method navigator-link -->
@@ -141,6 +146,13 @@
                   <span class="method-name">testAuto</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testAuto">
+                  </a> <!-- testAuto -->
+                  <span class="method-name">testAuto</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
           </div> <!-- suite-TestSuite-class-passed -->
         </div> <!-- panel TestSuite -->
@@ -152,7 +164,7 @@
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
-&lt;suite thread-count=&quot;3&quot; verbose=&quot;0&quot; name=&quot;TestSuite&quot;&gt;
+&lt;suite verbose=&quot;0&quot; name=&quot;TestSuite&quot;&gt;
   &lt;listeners&gt;
     &lt;listener class-name=&quot;com.mycompany.autotest.Reporter&quot;/&gt;
   &lt;/listeners&gt;
@@ -168,6 +180,12 @@
       &lt;class name=&quot;com.mycompany.autotest.TestNGTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- ChromeTest --&gt;
+  &lt;test name=&quot;SafariTest&quot;&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;Safari&quot;/&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.mycompany.autotest.TestNGTest&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- SafariTest --&gt;
 &lt;/suite&gt; &lt;!-- TestSuite --&gt;
             </pre>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -183,6 +201,9 @@
               </li>
               <li>
                 <span class="test-name">ChromeTest (1 class)</span>
+              </li>
+              <li>
+                <span class="test-name">SafariTest (1 class)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -208,20 +229,24 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(2);
+data.addRows(3);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'testAuto')
 data.setCell(0, 2, 'com.mycompany.autotest.TestNGTest')
-data.setCell(0, 3, 54109);
+data.setCell(0, 3, 8319);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'testAuto')
 data.setCell(1, 2, 'com.mycompany.autotest.TestNGTest')
-data.setCell(1, 3, 52809);
+data.setCell(1, 3, 4144);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'testAuto')
+data.setCell(2, 2, 'com.mycompany.autotest.TestNGTest')
+data.setCell(2, 3, 2628);
 window.suiteTableData['TestSuite']= { tableData: data, tableDiv: 'times-div-TestSuite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 1 minutes</span>
+              <span class="suite-total-time">Total running time: 15 seconds</span>
               <div id="times-div-TestSuite">
               </div> <!-- times-div-TestSuite -->
             </div> <!-- times-div -->
@@ -254,27 +279,35 @@ return data;
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">testAuto</span>
-                <span class="method-start">4595 ms</span>
+                <span class="method-start">6058 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
-                <img src="failed.png">
-                </img>
                 <span class="method-name">tearDown</span>
-                <span class="method-start">58705 ms</span>
+                <span class="method-start">14377 ms</span>
               </div> <!-- configuration-class after -->
               <div class="configuration-class before">
                 <span class="method-name">setUp(Chrome)</span>
-                <span class="method-start">59449 ms</span>
+                <span class="method-start">14886 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">testAuto</span>
-                <span class="method-start">62876 ms</span>
+                <span class="method-start">18190 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
-                <img src="failed.png">
-                </img>
                 <span class="method-name">tearDown</span>
-                <span class="method-start">115686 ms</span>
+                <span class="method-start">22335 ms</span>
+              </div> <!-- configuration-class after -->
+              <div class="configuration-class before">
+                <span class="method-name">setUp(Safari)</span>
+                <span class="method-start">22766 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="test-method">
+                <span class="method-name">testAuto</span>
+                <span class="method-start">25436 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-class after">
+                <span class="method-name">tearDown</span>
+                <span class="method-start">28064 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

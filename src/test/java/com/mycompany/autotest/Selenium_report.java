@@ -1,6 +1,6 @@
 package com.mycompany.autotest;
 
-import static com.relevantcodes.extentreports.DisplayOrder.NEWEST_FIRST;
+import com.relevantcodes.extentreports.DisplayOrder;
 import com.relevantcodes.extentreports.ExtentReports;
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +18,7 @@ public class Selenium_report {
     public static ExtentReports Instance() {
         ExtentReports extent;
         String Path = "./test_result/ExtentReport.html";
-        extent = new ExtentReports(Path, false, NEWEST_FIRST);
+        extent = new ExtentReports(Path, false,DisplayOrder.NEWEST_FIRST);
         extent.config().documentTitle("Automation Report").reportName("Regression");
 
         return extent;

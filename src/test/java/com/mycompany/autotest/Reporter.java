@@ -1,5 +1,6 @@
 package com.mycompany.autotest;
 
+import com.relevantcodes.extentreports.DisplayOrder;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -24,7 +25,7 @@ public class Reporter implements IReporter {
 
     @Override
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
-        extend = new ExtentReports("./test_result/TestNG-result.html", false);
+        extend = new ExtentReports("./test_result/TestNG-result.html", true, DisplayOrder.NEWEST_FIRST);
 
         for (ISuite suite : suites) {
             Map<String, ISuiteResult> result = suite.getResults();
@@ -51,18 +52,19 @@ public class Reporter implements IReporter {
             for (ITestResult result : tests.getAllResults()) {
                 test = extend.startTest(result.getMethod().getMethodName());
 
-                test.setStartedTime(getTime(result.getStartMillis()));
-                test.setEndedTime(getTime(result.getEndMillis()));
 
-                for (String group : result.getMethod().getGroups()) {
-                    test.assignCategory(group);
-                }
+//                test.setStartedTime(getTime(result.getStartMillis()));
+//                test.setEndedTime(getTime(result.getEndMillis()));
 
-                if (result.getThrowable() != null) {
-                    test.log(status, result.getThrowable());
-                } else {
-                    test.log(status, "Test " + status.toString().toLowerCase() + "ed");
-                }
+//                for (String group : result.getMethod().getGroups()) {
+//                    test.assignCategory(group);
+//                }
+
+//                if (result.getThrowable() != null) {
+//                    test.log(status, result.getThrowable());
+//                } else {
+//                    test.log(status, "Test " + status.toString().toLowerCase() + "ed");
+//                }
 
                 extend.endTest(test);
             }
