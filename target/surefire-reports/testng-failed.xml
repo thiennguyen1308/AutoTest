@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite verbose="0" name="Failed suite [TestSuite]">
-  <parameter name="browser" value="Safari"/>
+  <parameter name="browser" value="Firefox"/>
   <listeners>
     <listener class-name="com.mycompany.autotest.Reporter"/>
   </listeners>
@@ -11,10 +11,6 @@
       <class name="com.mycompany.autotest.TestNGTest">
         <methods>
           <include name="setUp"/>
-          <include name="setUp"/>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-          <include name="tearDown"/>
           <include name="tearDown"/>
           <include name="testAuto"/>
         </methods>

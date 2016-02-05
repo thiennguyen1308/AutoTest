@@ -1,13 +1,15 @@
 package com.mycompany.autotest;
 
-import com.relevantcodes.extentreports.DisplayOrder;
+import static com.relevantcodes.extentreports.DisplayOrder.NEWEST_FIRST;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.testng.IReporter;
 import org.testng.IResultMap;
 import org.testng.ISuite;
@@ -21,21 +23,23 @@ import org.testng.xml.XmlSuite;
  * @author nguyen Duc Thien
  */
 public class Reporter implements IReporter {
+
     private ExtentReports extend;
 
     @Override
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
-        extend = new ExtentReports("./test_result/TestNG-result.html", true, DisplayOrder.NEWEST_FIRST);
-
+        extend = new ExtentReports("./test_result/TestNG-result.html", false, NEWEST_FIRST);
         for (ISuite suite : suites) {
             Map<String, ISuiteResult> result = suite.getResults();
+            Set ref = result.keySet();
+            Iterator it = ref.iterator();
 
             for (ISuiteResult r : result.values()) {
+                String test_name = String.valueOf(it.next());
                 ITestContext context = r.getTestContext();
-
-                buildTestNodes(context.getPassedTests(), LogStatus.PASS);
-                buildTestNodes(context.getFailedTests(), LogStatus.FAIL);
-                buildTestNodes(context.getSkippedTests(), LogStatus.SKIP);
+                buildTestNodes(context.getPassedTests(), test_name, LogStatus.PASS);
+                buildTestNodes(context.getFailedTests(), test_name, LogStatus.FAIL);
+                buildTestNodes(context.getSkippedTests(), test_name, LogStatus.SKIP);
             }
         }
 
@@ -45,26 +49,25 @@ public class Reporter implements IReporter {
 
     ;
     
-    private void buildTestNodes(IResultMap tests, LogStatus status) {
+    private void buildTestNodes(IResultMap tests, String test_name, LogStatus status) {
         ExtentTest test;
 
         if (tests.size() > 0) {
             for (ITestResult result : tests.getAllResults()) {
-                test = extend.startTest(result.getMethod().getMethodName());
+                test = extend.startTest(test_name);
 
+                test.setStartedTime(getTime(result.getStartMillis()));
+                test.setEndedTime(getTime(result.getEndMillis()));
 
-//                test.setStartedTime(getTime(result.getStartMillis()));
-//                test.setEndedTime(getTime(result.getEndMillis()));
+                for (String group : result.getMethod().getGroups()) {
+                    test.assignCategory(group);
+                }
 
-//                for (String group : result.getMethod().getGroups()) {
-//                    test.assignCategory(group);
-//                }
-
-//                if (result.getThrowable() != null) {
-//                    test.log(status, result.getThrowable());
-//                } else {
-//                    test.log(status, "Test " + status.toString().toLowerCase() + "ed");
-//                }
+                if (result.getThrowable() != null) {
+                    test.log(status, result.getThrowable());
+                } else {
+                    test.log(status, "Test " + status.toString().toLowerCase() + "ed");
+                }
 
                 extend.endTest(test);
             }

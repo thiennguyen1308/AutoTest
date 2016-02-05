@@ -11,11 +11,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Parameters;
-import org.testng.asserts.Assertion;
-import org.testng.asserts.SoftAssert;
-import com.mycompany.autotest.Selenium_report;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.safari.SafariDriver;
 
@@ -40,18 +36,15 @@ public class TestNGTest {
         extend = Selenium_report.Instance();
         if (browser.equalsIgnoreCase("firefox")) {
             test = extend.startTest("test " + browser);
-            System.out.println("firefox");
             driver = new FirefoxDriver();
             driver.manage().window().maximize();
         } else if (browser.equalsIgnoreCase("chrome")) {
             test = extend.startTest("test " + browser);
-            System.out.println("chrome");
             System.setProperty("webdriver.chrome.driver", "/chromedriver");
             driver = new ChromeDriver();
             driver.manage().window().maximize();
         } else {
             test = extend.startTest("test " + browser);
-            System.out.println("Safari");
             driver = new SafariDriver();
             driver.manage().window().maximize();
         }
@@ -64,36 +57,80 @@ public class TestNGTest {
         driver.get(baseUrl + "/?gws_rd=ssl");
         try {
             assertEquals(driver.getTitle(), "Google");
-            test.log(LogStatus.PASS,"Check title google","Title is " + driver.getTitle());
+            test.log(LogStatus.PASS, "Check title google", "Title is " + driver.getTitle());
+        } catch (Exception e) {
+            test.log(LogStatus.ERROR, "Check title google", e.getMessage());
         } catch (Error e) {
             verificationErrors.append(e.toString());
-            test.log(LogStatus.ERROR,"Check title google",e.toString());
+            test.log(LogStatus.FAIL, "Check title google", e.toString() + "like below" + test.addScreenCapture(Selenium_report.CaptureScreen(driver, String.valueOf(System.currentTimeMillis()))));
         }
         driver.findElement(By.id("lst-ib")).clear();
-        driver.findElement(By.id("lst-ib")).sendKeys("how to run selenium");
+        driver.findElement(By.id("lst-ib")).sendKeys("selenium tutorial");
         driver.findElement(By.name("btnG")).click();
-        driver.findElement(By.linkText("Selenium 1 (Selenium RC) — Selenium Documentation")).click();
         for (int second = 0;; second++) {
-            if (second >= 60) {
-                fail("timeout");
+            if (second >= 5) {
+                if (error == null) {
+                    test.log(LogStatus.FAIL, "Type 'selenium tutorial' and search", "FAIL" + "like below" + test.addScreenCapture(Selenium_report.CaptureScreen(driver, String.valueOf(System.currentTimeMillis()))));
+                    break;
+                } else {
+                    test.log(LogStatus.ERROR, "Type 'selenium tutorial' and search", error);
+                    error = null;
+                    break;
+                }
             }
             try {
-                if ("Browser Automation".equals(driver.findElement(By.linkText("Browser Automation")).getText())) {
+                if ("selenium tutorial - Tìm với Google".equals(driver.getTitle())) {
+                    test.log(LogStatus.PASS, "Type 'selenium tutorial' and search", "Search selenium tutorial success");
                     break;
                 }
             } catch (Exception e) {
+                error = e.getMessage();
             }
             Thread.sleep(1000);
         }
 
+        try {
+            assertTrue(isElementPresent(By.linkText("Selenium Tutorial - TutorialsPoints")));
+            test.log(LogStatus.PASS, "Verify search result", "Found Selenium Tutorial - TutorialsPoint");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+            test.log(LogStatus.FAIL, "Verify search result", "Not found link Selenium Tutorial - TutorialsPoints likes below" + test.addScreenCapture(Selenium_report.CaptureElementScreen(driver, driver.findElement(By.linkText("Selenium Tutorial - TutorialsPoint")), String.valueOf(System.currentTimeMillis()))));
+        }
+        driver.findElement(By.linkText("Selenium Tutorial - TutorialsPoint")).click();
+        Thread.sleep(3000);
+
+        try {
+            assertEquals(driver.getTitle(), "Selenium Tutorial");
+            test.log(LogStatus.PASS, "Go to result website", "Success");
+        } catch (Exception e) {
+            test.log(LogStatus.ERROR, "Go to result website", e.getMessage());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+            test.log(LogStatus.FAIL, "Go to result website", e.toString() + " like below" + test.addScreenCapture(Selenium_report.CaptureScreen(driver, String.valueOf(System.currentTimeMillis()))));
+        }
+
+        try {
+            assertEquals(driver.findElement(By.linkText("Selenium - Homes")).getText(), "Selenium - Home");
+            test.log(LogStatus.PASS, "Check Selenium - Home menu", "OK");
+        } catch (Exception e) {
+            verificationErrors.append(e.getMessage());
+            test.log(LogStatus.ERROR, "Check Selenium - Home menu", e.getMessage());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+            test.log(LogStatus.FAIL, "Check Selenium - Home menu", e.toString() + " like below" + test.addScreenCapture(Selenium_report.CaptureScreen(driver, String.valueOf(System.currentTimeMillis()))));
+        }
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
 
+//end test
         extend.endTest(test);
+//Write result to .html
         extend.flush();
+//Close file .html
         extend.close();
+//Quit driver, close browse
         driver.quit();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
