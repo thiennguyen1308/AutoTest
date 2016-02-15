@@ -90,7 +90,7 @@ public class TestNGTest {
         }
 
         try {
-            assertTrue(isElementPresent(By.linkText("Selenium Tutorial - TutorialsPoints")));
+            assertTrue(isElementPresent(By.linkText("Selenium Tutorial - TutorialsPoint")));
             test.log(LogStatus.PASS, "Verify search result", "Found Selenium Tutorial - TutorialsPoint");
         } catch (Error e) {
             verificationErrors.append(e.toString());
@@ -110,7 +110,7 @@ public class TestNGTest {
         }
 
         try {
-            assertEquals(driver.findElement(By.linkText("Selenium - Homes")).getText(), "Selenium - Home");
+            assertEquals(driver.findElement(By.linkText("Selenium - Home")).getText(), "Selenium - Home");
             test.log(LogStatus.PASS, "Check Selenium - Home menu", "OK");
         } catch (Exception e) {
             verificationErrors.append(e.getMessage());
