@@ -18,12 +18,12 @@
             </class>
         </classes>
     </test>
-    <test name="SafariTest" allow-return-values="true">
+<!--    <test name="SafariTest" allow-return-values="true">
         <parameter name="browser" value="Safari" />
         <classes>
             <class name="com.mycompany.autotest.TestNGTest">
             </class>
         </classes>
-    </test>
+    </test>-->
 </suite>
 
